@@ -1,0 +1,50 @@
+name: 's3-cache-action'
+description: >-
+  Cache artifacts like dependencies and build outputs to s3, to improve workflow
+  execution time, with option to check for cache hits without restoring
+
+inputs:
+  restore:
+    description: 'Restore the cache item to the local repository'
+    required: false
+    default: 'true'
+
+  fail-on-miss:
+    description: 'Fail if a cache miss occurs'
+    required: false
+    default: 'false'
+
+  path:
+    description: 'A list of files, directories, and wildcard patterns to cache and restore'
+    required: false
+
+  key:
+    description: 'An explicit key for restoring and saving the cache'
+    required: true
+
+  s3_prefix:
+    description: 'Prefix in to S3 bucket'
+    required: false
+    default: ''
+
+  s3_bucket:
+    description: 'S3 bucket to save cache data to'
+    required: false
+
+  s3_access_key_id:
+    description: 'S3 bucket API access key id'
+    required: false
+
+  s3_secret_access_key:
+    description: 'S3 bucket API secret key'
+    required: false
+
+outputs:
+  cache-hit:
+    description: 'A boolean value to indicate an exact match was found for the primary key'
+
+runs:
+  using: node12
+  main: dist/restore/index.js
+  post: dist/save/index.js
+  post-if: 'success()'
