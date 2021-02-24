@@ -6,8 +6,14 @@ import * as compression from "./compress";
 
 async function run(): Promise<void> {
   try {
+    const noSave = core.getInputAsBoolean(Inputs.NoSave);
     const cacheKey = core.getState(State.CacheKey);
     const cacheHit = core.getStateAsBoolean(State.CacheHit);
+
+    if (noSave) {
+      core.info(`no-save mode - not saving state`);
+      return;
+    }
 
     if (cacheHit) {
       core.info(`Cache hit occurred on key ${cacheKey}, not saving state.`);

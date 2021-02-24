@@ -80,6 +80,7 @@ var Inputs;
 (function (Inputs) {
     Inputs["FailOnMiss"] = "fail-on-miss";
     Inputs["Restore"] = "restore";
+    Inputs["NoSave"] = "no-save";
     Inputs["Key"] = "key";
     Inputs["Path"] = "path";
     Inputs["S3Prefix"] = "s3_prefix";
@@ -162,8 +163,13 @@ const compression = __importStar(__webpack_require__(974));
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
+            const noSave = core.getInputAsBoolean(constants_1.Inputs.NoSave);
             const cacheKey = core.getState(constants_1.State.CacheKey);
             const cacheHit = core.getStateAsBoolean(constants_1.State.CacheHit);
+            if (noSave) {
+                core.info(`no-save mode - not saving state`);
+                return;
+            }
             if (cacheHit) {
                 core.info(`Cache hit occurred on key ${cacheKey}, not saving state.`);
                 return;

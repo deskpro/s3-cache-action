@@ -80,6 +80,7 @@ var Inputs;
 (function (Inputs) {
     Inputs["FailOnMiss"] = "fail-on-miss";
     Inputs["Restore"] = "restore";
+    Inputs["NoSave"] = "no-save";
     Inputs["Key"] = "key";
     Inputs["Path"] = "path";
     Inputs["S3Prefix"] = "s3_prefix";

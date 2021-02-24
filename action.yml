@@ -14,6 +14,11 @@ inputs:
     required: false
     default: 'false'
 
+  no-save:
+    description: 'Skip post-job state saving (e.g. turns this into just a cache hit check)'
+    required: false
+    default: 'false'
+
   path:
     description: 'A list of files, directories, and wildcard patterns to cache and restore'
     required: false

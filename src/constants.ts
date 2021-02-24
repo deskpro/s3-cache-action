@@ -3,6 +3,7 @@ import * as os from "os";
 export enum Inputs {
   FailOnMiss = "fail-on-miss",
   Restore = "restore",
+  NoSave = "no-save",
   Key = "key",
   Path = "path",
 
